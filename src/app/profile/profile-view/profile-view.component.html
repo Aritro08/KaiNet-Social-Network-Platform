@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-mid-12 data" *ngIf="profileData">
+        <div class="img">
+            <img [src]="profileData.profileImage" [alt]="profileData.username" class="img-fluid">
+        </div>
+        <div class="content align-items-start flex-column">
+            <h3 class="name">{{ profileData.username }}</h3>
+            <h5 class="bio">{{ profileData.bio }}</h5>
+            <button class="btn btn-dark mt-auto" type="button" 
+            [routerLink]="['/profile/edit/' + profileData._id]"
+            *ngIf="profileData._id&&(profileData._id.toString()===userId.toString())">Edit Profile</button>
+            <button class="btn btn-dark mt-auto" type="button" 
+            *ngIf="(profileData._id.toString()!=userId.toString())&&(profileData.friendStatus==='Add friend')" 
+            (click)="onAddFriend(profileData)">{{ profileData.friendStatus }}</button>
+            <button class="btn btn-dark mt-auto" type="button" 
+            *ngIf="(profileData._id.toString()!=userId.toString())&&(profileData.friendStatus==='Request sent')" 
+            [disabled]="true">{{ profileData.friendStatus }}</button>
+            <div class="mt-auto pending" 
+            *ngIf="(profileData._id.toString()!=userId.toString())&&(profileData.friendStatus==='Pending request')"> 
+                <div class="request">Accept friend request?</div>  
+                <div class="request-actions">
+                    <button class="btn btn-success btn-sm" type="button" (click)="onAcceptReq(profileData)">Yes</button>
+                    <button class="btn btn-danger btn-sm" type="button" (click)="onRejectReq(profileData)">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row nav-row" *ngIf="profileData">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['./']">Posts</a>
+            </li>
+            <li class="nav-item"  routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['./friend-list']" 
+                *ngIf="profileData._id&&(profileData._id.toString()===userId.toString())">Friends</a>
+            </li>
+            <li class="nav-item"  routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['./friend-requests']"
+                *ngIf="profileData._id&&(profileData._id.toString()===userId.toString())">Friend Requests</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<router-outlet></router-outlet>

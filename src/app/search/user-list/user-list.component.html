@@ -1,0 +1,17 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let user of users">
+        <div>
+            <img [src]="user.profileImage" class="img-responsive">
+            <div class="content">
+                <h4>{{ user.username }}</h4>
+                <!-- <button class="btn btn-dark btn-sm" type="button" 
+                *ngIf="(user.friendStatus==='Add friend')&&(user._id!=userId)" (click) = "onAddfriend(user)">{{ user.friendStatus }}</button>
+                <button class="btn btn-dark btn-sm" type="button" 
+                *ngIf="((user.friendStatus==='Friend')||(user.friendStatus==='Request sent'))&&(user._id!=userId)" [disabled]="true">{{ user.friendStatus }}</button>
+                <button class="btn btn-dark btn-sm" type="button" 
+                *ngIf="(user.friendStatus==='Accept request')&&(user._id!=userId)" (click) = "onAcceptfriend(user)">{{ user.friendStatus }}</button> -->
+                <button class="btn btn-dark" type="button" (click)="onViewProfile(user._id)">View Profile</button>
+            </div>
+        </div>
+    </li>
+</ul>

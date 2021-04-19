@@ -1,18 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthFormComponent } from './auth/auth-form/auth-form.component';
+import { PostListComponent } from './posts/post-list/post-list.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
+import { PostViewComponent } from './posts/post-view/post-view.component';
+import { CommentsComponent } from './posts/post-view/comments/comments.component';
+import { ProfilePostsViewComponent } from './profile/profile-view/profile-posts-view/profile-posts-view.component';
+import { SearchComponent } from './search/search.component';
+import { UserListComponent } from './search/user-list/user-list.component';
+import { FriendRequestsComponent } from './profile/profile-view/friend-requests/friend-requests.component';
+import { FriendListComponent } from './profile/profile-view/friend-list/friend-list.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    AuthFormComponent,
+    PostListComponent,
+    ProfileEditComponent,
+    ProfileViewComponent,
+    PostCreateComponent,
+    PostViewComponent,
+    CommentsComponent,
+    ProfilePostsViewComponent,
+    SearchComponent,
+    UserListComponent,
+    FriendRequestsComponent,
+    FriendListComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

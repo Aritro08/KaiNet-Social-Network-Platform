@@ -1,0 +1,16 @@
+<div class="row" *ngFor="let posts of dispPosts">
+    <div class="col-md-4" *ngFor="let post of posts">
+        <div class="card" (click) = 'viewPost(post.id)' style="cursor: pointer;">
+            <img [src]="post.image" class="card-img-top" style="cursor: pointer;" [alt]="post.title" *ngIf="post.image">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ post.username }}</h6>
+                <p class="card-text" *ngIf="(post.content!='null')&&post.image">{{ post.content.substring(0, 120) + '...' }}</p>
+                <p class="card-text" *ngIf="(post.content!='null')&&!post.image">{{ post.content.substring(0, 325) + '...' }}</p>   
+                <button class="btn btn-primary" [disabled]="true">{{ post.upvotes.up_count + '+' }}</button>
+                <button class="btn btn-primary" [disabled]="true">{{ post.downvotes.down_count + '-' }}</button>
+                <button class="btn btn-primary" [disabled]="true">{{ post.commentCount }}</button>
+            </div>
+          </div>
+    </div>
+</div>

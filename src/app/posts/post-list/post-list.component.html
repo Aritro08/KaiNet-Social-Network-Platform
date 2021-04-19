@@ -1,0 +1,19 @@
+<div class="row" *ngFor="let post of posts">
+    <div class="card">
+        <img [src]="post.image" class="card-img-top" style="cursor: pointer;" [alt]="post.title" *ngIf="post.image" (click) = 'viewPost(post.id)'>
+        <div class="card-body">
+          <div class="clickable" (click) = 'viewPost(post.id)'>
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ post.username }}</h6>
+                <p class="card-text" *ngIf="post.content!='null'">{{ post.content.substring(0, 120) + '...' }}</p>
+          </div>      
+          <button class="btn btn-outline-primary" type="button" (click)="upVote(post)" 
+                  [ngClass]="(post.upvoted&&isAuth? 'active': '')" 
+                  [disabled]="(post.downvoted&&isAuth)||!isAuth">{{ post.upvotes.up_count + ' +'}}</button>
+          <button class="btn btn-outline-primary" type="button" (click)="downVote(post)"
+                  [ngClass]="(post.downvoted&&isAuth? 'active': '')" 
+                  [disabled]="(post.upvoted&&isAuth)||!isAuth">{{ post.downvotes.down_count + ' -'}}</button>
+          <button class="btn btn-primary" [disabled]="true">{{ post.commentCount }}</button>
+        </div>
+      </div>
+</div>

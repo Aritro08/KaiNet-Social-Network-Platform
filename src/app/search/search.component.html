@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-8" style="margin: auto;">
+        <div class="row">
+            <div class="col-md">
+                <input type="text" name="searchQuery" 
+                class="form-control" [(ngModel)]="searchQuery" (keyup)="runSearch()"> 
+            </div>
+            <div class="col-md-1">
+                <label for="filter">Filter: </label>
+            </div>
+            <div class="col-md-2">
+                <select name="filter" id="filter" [(ngModel)]="filter" class="form-control">
+                    <option value="posts" selected>Posts</option>
+                    <option value="users">Users</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<app-post-list *ngIf="(filter==='posts')&&(searchQuery)"></app-post-list>
+<app-user-list *ngIf="(filter==='users')&&(searchQuery)"></app-user-list>

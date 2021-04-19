@@ -1,0 +1,24 @@
+form{
+    max-width: 400px;
+    margin: auto;
+}  
+.form-control{
+    margin-bottom: 10px;
+} 
+
+.btn{
+    margin: auto;
+    display: block;
+}
+
+input[type='file'] {
+    visibility: hidden;
+}
+.img-prev{
+    width: 12rem;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.img-prev img{
+    width: 100%;
+}

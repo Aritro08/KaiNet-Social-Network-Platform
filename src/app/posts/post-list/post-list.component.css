@@ -1,0 +1,15 @@
+.card{
+    width: 32rem;
+    margin: 1rem auto 0 auto;
+}
+.btn{
+    margin-right: 1rem;
+}
+button:focus {
+    outline: 0;
+    box-shadow: none;
+}
+.clickable{
+    cursor: pointer;
+    margin-bottom: 1rem;
+}

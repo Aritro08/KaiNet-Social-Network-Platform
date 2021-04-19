@@ -1,0 +1,27 @@
+ul {
+    border-left: 1px black solid;
+}
+li{
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+.username{
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+.content{
+    font-size: 16px;
+    margin-bottom: 10px; 
+}
+.btn{
+    font-size: 12px;
+    padding: 5px;
+    margin: 0 10px 15px 0;
+}
+.form-control{
+    margin-bottom: 10px;
+} 
+.form-control:focus{
+    box-shadow: none;
+    outline: none;
+}

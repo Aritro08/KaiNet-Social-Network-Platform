@@ -1,0 +1,32 @@
+<div class="row" *ngIf="post">
+    <div class="col-md-8">
+        <div class="card">
+            <img [src]="post.image" class="card-img-top" [alt]="post.title" *ngIf="post.image">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted clickable" (click)="viewUser(post.username)">{{ post.username }}</h6>
+              <!-- <h6 class="card-subtitle mb-2 text-muted">{{ post.postDate }}</h6> -->
+              <p class="card-text">{{ post.content }}</p>
+              <button class="btn btn-outline-primary" type="button" (click)="upVote(post)" 
+                  [ngClass]="(post.upvoted&&isAuth? 'active': '')" 
+                  [disabled]="(post.downvoted&&isAuth)||!isAuth">{{ post.upvotes.up_count + ' +'}}</button>
+              <button class="btn btn-outline-primary" type="button" (click)="downVote(post)"
+                  [ngClass]="(post.downvoted&&isAuth? 'active': '')" 
+                  [disabled]="(post.upvoted&&isAuth)||!isAuth">{{ post.downvotes.down_count + ' -'}}</button>
+              <button class="btn btn-primary" [disabled]="true">{{ post.commentCount }}</button>
+              <button class="btn btn-warning" *ngIf="post.userId === userId" (click) = 'onEditPost(post.id)'>Edit</button>
+              <button class="btn btn-danger" *ngIf="post.userId === userId" (click) = 'onDeletePost(post.id)'>Delete</button>
+            </div>
+        </div>
+        <hr *ngIf="isAuth">
+        <form [formGroup]="commentForm" (ngSubmit)="onComment()" *ngIf="isAuth">
+            <div class="form-group">
+                <label for="content">Comment as {{ userName }}</label>
+                <textarea id="content" rows="3" formControlName="content" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark" [disabled]="!commentForm.valid">Comment</button>
+        </form>
+        <hr>
+        <app-comments [comments] = 'comments' [postId]='post.id'></app-comments>
+    </div>
+</div>

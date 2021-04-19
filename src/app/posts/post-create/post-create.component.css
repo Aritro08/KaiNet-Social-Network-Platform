@@ -1,0 +1,33 @@
+form{
+    max-width: 600px;
+    margin: auto;
+}  
+.form-control{
+    margin-bottom: 10px;
+} 
+.form-control:focus{
+    box-shadow: none;
+    outline: none;
+} 
+/* button[type='button'] {
+    display: block;
+} */
+.btn{
+    margin: 5px auto;
+    display: block;
+}
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+input[type='file'] {
+    visibility: hidden;
+}
+.img-prev{
+    width: 400px;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.img-prev img{
+    width: 100%;
+}

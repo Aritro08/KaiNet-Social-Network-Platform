@@ -1,0 +1,26 @@
+<div *ngFor="let comment of comments">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <p class="username">{{ comment.username }}</p>
+            <p class="content">{{ comment.content }}</p>
+            <button type="button" class="btn btn-dark btn-sm" (click)="onToggleForm(comment)" 
+            *ngIf="!comment.replyFormDisplay&&isAuth">Reply</button>
+            <button type="button" class="btn btn-warning btn-sm" 
+            *ngIf="(comment.userId === userId)&&(!comment.replyFormDisplay&&isAuth)&&(comment.content != '[deleted]')" 
+            (click)="onEditComment(comment)">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm" 
+            *ngIf="(comment.userId === userId)&&(!comment.replyFormDisplay&&isAuth)&&(comment.content != '[deleted]')" 
+            (click)="onDeleteComment(comment._id)">Delete</button>
+            <form [formGroup] = 'replyForm' (ngSubmit) = 'onAddReply(comment)' *ngIf='comment.replyFormDisplay'>
+                <hr>
+                <div class="form-group">
+                    <label for="reply">{{ editMode? 'Edit':'Reply' }} as {{ userName }}</label>
+                    <textarea id="reply" rows="3" class="form-control" formControlName='content'></textarea>
+                    <button type="submit" class="btn btn-dark btn-sm" [disabled]='!replyForm.valid'>{{ editMode? 'Edit':'Reply' }}</button>
+                    <button type="button" class="btn btn-dark btn-sm" (click)="onToggleForm(comment)">Cancel</button>
+                </div>
+            </form>
+            <app-comments [comments]="comment.children" [postId]="postId"></app-comments>
+        </li>
+    </ul>
+</div>

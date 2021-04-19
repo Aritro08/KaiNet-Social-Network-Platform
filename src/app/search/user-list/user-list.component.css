@@ -1,0 +1,14 @@
+img {
+    max-width: 100px;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    margin-right: 30px;
+}
+.content {
+    display: block;
+    margin: 10px;
+}
+li {
+    max-width: 500px;
+}
