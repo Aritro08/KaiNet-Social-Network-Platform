@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,13 @@ import { AuthService } from './auth/auth.service';
 
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private socket: Socket) {}
 
   ngOnInit() {
     this.authService.autoLogin();
+    // this.socket.emit('test');
+    // this.socket.on('test-back', s => {
+    //   console.log(s);
+    // });
   }
 }

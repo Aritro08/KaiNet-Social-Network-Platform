@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-8" style="margin: auto;">
+        <form #f=ngForm (ngSubmit)="onSubmit(f)">
+            <div class="row">
+                <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Enter chatroom name" name="roomName" ngModel>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-dark" type="submit">Create Room</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-8" style="margin: auto;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let chatroom of chatlist">
+                <div class="content" (click) = "viewRoom(chatroom._id)">
+                    <h4>{{ chatroom.name }}</h4>
+                    <p>Members : {{ chatroom.users.length }}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -9,7 +9,10 @@ const userSchema = mongoose.Schema({
     profileImage: {type: String},
     sentRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     recvRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-    friendList: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
+    friendList: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    sentChatRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    recvChatRequests: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    chatList: [{type: mongoose.Schema.Types.ObjectId, ref: "Chatroom"}],
 });
 
 userSchema.plugin(uniqueValidator);

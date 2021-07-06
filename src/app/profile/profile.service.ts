@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ProfileData } from '../models/profile.model';
 import { PostService } from '../posts/post.service';
 
 @Injectable({providedIn: 'root'})

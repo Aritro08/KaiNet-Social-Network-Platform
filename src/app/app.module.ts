@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +19,10 @@ import { SearchComponent } from './search/search.component';
 import { UserListComponent } from './search/user-list/user-list.component';
 import { FriendRequestsComponent } from './profile/profile-view/friend-requests/friend-requests.component';
 import { FriendListComponent } from './profile/profile-view/friend-list/friend-list.component';
+import { ChatroomsComponent } from './chatrooms/chatrooms.component';
+import { RoomComponent } from './chatrooms/room/room.component';
 
+const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -36,13 +40,16 @@ import { FriendListComponent } from './profile/profile-view/friend-list/friend-l
     UserListComponent,
     FriendRequestsComponent,
     FriendListComponent,
+    ChatroomsComponent,
+    RoomComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(socketConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

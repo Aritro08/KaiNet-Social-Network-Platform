@@ -1,0 +1,11 @@
+.form-control:focus button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.btn{
+    margin: auto;
+    display: block;
+}
+.content {
+    cursor: pointer;
+}

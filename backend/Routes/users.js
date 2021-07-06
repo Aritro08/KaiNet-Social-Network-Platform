@@ -71,7 +71,10 @@ router.post('/sign-up', (req, res, next) => {
             profileImage: profileImage,
             sentRequests: [],
             recvRequests: [],
-            friendList: []
+            friendList: [],
+            sentChatRequests: [],
+            recvChatrequests: [],
+            chatList: []
         });
         user.save().then(resData => {
             const token = jwt.sign({username: resData.username, id: resData._id}, 'qwerty', {expiresIn: '1h'});

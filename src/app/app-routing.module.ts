@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthFormComponent } from './auth/auth-form/auth-form.component';
+import { ChatroomsComponent } from './chatrooms/chatrooms.component';
+import { RoomComponent } from './chatrooms/room/room.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostViewComponent } from './posts/post-view/post-view.component';
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'profile/edit/:id', component: ProfileEditComponent },
   { path: 'create-post', component: PostCreateComponent},
   { path: 'post/edit/:id', component: PostCreateComponent },
-  { path: 'post/:id', component: PostViewComponent}
+  { path: 'post/:id', component: PostViewComponent},
+  { path: 'chatrooms', component: ChatroomsComponent },
+  { path: 'chatroom/:id', component: RoomComponent }
 ];
 
 @NgModule({

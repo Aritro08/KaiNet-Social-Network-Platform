@@ -1,0 +1,13 @@
+.left {
+    border-left: 1px black solid;
+}
+img {
+    border-radius: 50%;
+    width: 50px;
+}
+.btn{
+    float: right;
+}
+.content{
+    display: inline-block;
+}

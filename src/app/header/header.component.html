@@ -4,6 +4,7 @@
         <div class="navbar-nav">
           <a class="nav-link" routerLink="/create-post" routerLinkActive *ngIf="isAuth">Upload</a>
           <a class="nav-link" routerLink="/search" routerLinkActive *ngIf="isAuth">Search</a>
+          <a class="nav-link" routerLink="/chatrooms" routerLinkActive *ngIf="isAuth">Chat Rooms</a>
           <a class="nav-link" routerLink="/login" routerLinkActive *ngIf='!isAuth'>Login</a>
           <a class="nav-link" routerLink="/sign-up" routerLinkActive *ngIf="!isAuth">Sign Up</a>
           <a class="nav-link" *ngIf="isAuth" [routerLink]="['/profile/' + userId]">{{ username }}</a>

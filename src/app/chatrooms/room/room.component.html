@@ -1,0 +1,30 @@
+<div class="row" *ngIf="chatroom">
+    <div class="col-md-8">
+        <h3>{{ chatroom.name }}</h3>
+    </div>
+    <div class="col-md-4 left" *ngIf="friends">
+        <div class="members">
+            <h3>Members</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let member of roomMembers">
+                    {{member.username}}
+                </li>
+            </ul>
+        </div>
+        <!-- <hr> -->
+        <div class="friends">
+            <h3>Add to room</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let friend of friends">
+                    <div *ngIf="!chatroom.users.includes(friend._id)">
+                        <div class="content">
+                            <img [src]="friend.profileImage" class="img-responsive">
+                            {{friend.username}}
+                        </div>
+                        <button class="btn btn-dark" (click) = "addToRoom(friend._id)">Add</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
