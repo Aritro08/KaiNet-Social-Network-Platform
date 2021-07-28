@@ -31,7 +31,7 @@ import { ErrorComponent } from './error/error.component';
 import { environment } from 'src/environments/environment';
 
 const APIURL = environment.apiUrl;
-const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const socketConfig: SocketIoConfig = { url: 'https://kaisocnet.herokuapp.com', options: {} };
 
 @NgModule({
   declarations: [
