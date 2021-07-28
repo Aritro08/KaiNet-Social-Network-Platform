@@ -21,6 +21,9 @@ form{
 .head{
     text-align: center;
 }
+.sub-head{
+    text-align: center;
+}
 .btn{
     margin: auto;
     display: block;
@@ -28,4 +31,19 @@ form{
 .btn:focus {
     outline: none;
     box-shadow: none;
+}
+input, input:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+}
+.auth-container{
+    background-color:  #1a1a1b;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 5rem;
+    color: rgb(240, 240, 240, 0.85);
 }

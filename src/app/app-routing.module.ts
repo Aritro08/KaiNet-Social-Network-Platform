@@ -12,7 +12,7 @@ import { FriendRequestsComponent } from './profile/profile-view/friend-requests/
 import { ProfilePostsViewComponent } from './profile/profile-view/profile-posts-view/profile-posts-view.component';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 import { SearchComponent } from './search/search.component';
-
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path : '', component: PostListComponent},
@@ -23,17 +23,19 @@ const routes: Routes = [
     { path: '', component: ProfilePostsViewComponent },
     { path: 'friend-requests', component: FriendRequestsComponent },
     { path: 'friend-list', component: FriendListComponent }
-  ] },
-  { path: 'profile/edit/:id', component: ProfileEditComponent },
-  { path: 'create-post', component: PostCreateComponent},
-  { path: 'post/edit/:id', component: PostCreateComponent },
+  ], canActivate: [AuthGuard]},
+  { path: 'profile/edit/:id', component: ProfileEditComponent, canActivate: [AuthGuard] },
+  { path: 'create-post', component: PostCreateComponent, canActivate: [AuthGuard]},
+  { path: 'post/edit/:id', component: PostCreateComponent, canActivate: [AuthGuard]},
   { path: 'post/:id', component: PostViewComponent},
-  { path: 'chatrooms', component: ChatroomsComponent },
-  { path: 'chatroom/:id', component: RoomComponent }
+  { path: 'chatrooms', component: ChatroomsComponent, canActivate: [AuthGuard]},
+  { path: 'chatroom/:id', component: RoomComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
+
 export class AppRoutingModule { }

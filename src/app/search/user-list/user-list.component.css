@@ -6,9 +6,24 @@ img {
     margin-right: 30px;
 }
 .content {
-    display: block;
+    display: inline-block;
     margin: 10px;
 }
+h2{
+    font-weight: normal;
+}
 li {
-    max-width: 500px;
+    margin: 15px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+}
+.list-group {
+    display: block;
+    border-radius: 10px;
+}
+.no-users{
+    justify-content: center;
+    margin: 10px;
 }

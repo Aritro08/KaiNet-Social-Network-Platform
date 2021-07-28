@@ -1,6 +1,8 @@
 .card{
-    width: 32rem;
+    width: 40rem;
     margin: 1rem auto 0 auto;
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
 }
 .btn{
     margin-right: 1rem;
@@ -12,4 +14,25 @@ button:focus {
 .clickable{
     cursor: pointer;
     margin-bottom: 1rem;
+}
+.no-posts{
+    margin: 10px;
+    justify-content: center;
+}
+.card-title{
+    font-weight: normal;
+    margin-bottom: 0;
+}
+.card-text{
+    font-size: 16px;
+    font-weight: 350;
+}
+.comment-icon{
+    margin-right: 10px;
+}
+
+@media (max-width: 351px) {
+    .comment-btn{
+        margin: 10px 0;
+    }
 }

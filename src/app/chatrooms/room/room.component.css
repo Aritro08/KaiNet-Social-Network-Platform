@@ -1,13 +1,142 @@
-.left {
-    border-left: 1px black solid;
+.room-container{
+    margin: 0 130px;
+    color: rgb(240, 240, 240, 0.85);
 }
-img {
+.addimg {
     border-radius: 50%;
     width: 50px;
+    margin-right: 10px;
 }
-.btn{
+.msgimg{
+    border-radius: 50%;
+    width: 40px;
+}
+.addbtn{
     float: right;
 }
-.content{
+.addroom-content{
     display: inline-block;
+}
+.chat-box{
+    display: block;
+    height: 570px;
+    margin: 10px 0;
+    background-color: #1a1a1b;
+    border-radius: 10px;
+    padding: 10px;
+}
+.form-control{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: none;
+}
+.form-control:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+    box-shadow: none;
+    outline: none;
+}
+.send{
+    width: 100px;
+    display: block;
+    float: right;
+}
+.send:focus{
+    box-shadow: none;
+    outline: none;
+}
+.message-bar{
+    padding-right: 0;
+}
+.send-bar{
+    padding-left: 0;
+}
+.list-group-item {
+    border-radius: 10px;
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    margin-top: 15px;
+}
+.list-group{
+    border-radius: 10px;
+}
+h3{
+    font-size: 20px !important;
+    margin: 0 !important;
+}
+.members, .friends {
+    margin-top: 20px;
+}
+.message-row{
+    margin: 5px;
+}
+.datetime{
+    float: right;
+    font-weight: 400;
+    margin: 0;
+}
+.from{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+.message{
+    font-size: 16px;
+}
+.img-col{
+    padding: 0;
+    max-width: 70px;
+}
+.chat-content{
+    padding: 0;
+}
+.roomname{
+    display: inline-block;
+    color: rgb(240, 240, 240, 0.85);
+}
+.close-room-btn{
+    float: right;
+}
+.leave{
+    float: right;
+    margin-right: 10px;
+}
+.chat-alert-text{
+    text-align: center;
+    margin: 0 !important;
+    font-size: 16px;
+    color: rgb(240, 240, 240, 0.85);
+}
+.chat-alert{
+    margin: 8px auto;
+    max-width: 400px;
+    padding: 3px;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 1140px) {
+    .room-container{
+        margin: 0 10px;
+    }
+}
+@media (max-width: 820px) {
+    .msgimg{
+        width: 30px;
+        height: 30px;
+        margin-bottom: 5px;
+    }
+}
+@media (max-width: 767px) {
+    .send{
+        margin: 10px auto;
+    }
+    .send-bar{
+        display: flex;
+    }
 }

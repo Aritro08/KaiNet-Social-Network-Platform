@@ -42,7 +42,6 @@ export class CommentsComponent implements OnInit {
     comment.replyFormDisplay = false;
     if(this.editMode) {
       this.postService.editComment(comment._id, content).subscribe(resData => {
-        console.log(resData);
         comment.content = content;
       });
     } else {

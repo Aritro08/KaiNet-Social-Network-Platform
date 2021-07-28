@@ -27,7 +27,7 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
     this.postForm = new FormGroup({
       'title': new FormControl(null, {validators: [Validators.required]}),
-      'content': new FormControl(null),
+      'content': new FormControl(''),
       'image': new FormControl(null)
     });
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -72,6 +72,10 @@ export class PostCreateComponent implements OnInit {
       this.imagePrev = <string>reader.result;
     }
     reader.readAsDataURL(file);
+  }
+
+  onCancel() {
+    window.history.back();
   }
 
 }

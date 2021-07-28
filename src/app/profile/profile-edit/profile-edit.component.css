@@ -1,16 +1,36 @@
+.edit-container{
+    background-color: #1a1a1b;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 1rem;
+    color: rgb(240, 240, 240, 0.85);
+}
+.edit-head{
+    text-align: center;
+}
 form{
     max-width: 400px;
     margin: auto;
 }  
 .form-control{
     margin-bottom: 10px;
+    box-shadow: none;
+    outline: none;
 } 
-
+.update-btn, .cancel-btn{
+    margin: 10px !important;
+    display: inline-block !important;
+}
+.btn-row{
+    display: flex;
+    justify-content: center;
+}
 .btn{
     margin: auto;
     display: block;
 }
-
 input[type='file'] {
     visibility: hidden;
 }
@@ -21,4 +41,21 @@ input[type='file'] {
 }
 .img-prev img{
     width: 100%;
+    border-radius: 10px;
+}
+label{
+    font-size: 16px;
+}
+textarea, textarea:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    font-weight: 350;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+}
+input, input:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
 }

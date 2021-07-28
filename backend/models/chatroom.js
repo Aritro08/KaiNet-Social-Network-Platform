@@ -5,9 +5,10 @@ const chatroomSchema = mongoose.Schema({
     admin: {type: mongoose.Schema.Types.ObjectId, required: true},
     users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     messages: [{
-        text: {type: String, required: true},
+        message: {type: String, required: true},
         from: {type: String, required: true},
-        date: {type: Date, required: true}
+        image: {type: String, required: true},
+        datetime: {type: String, required: true}
     }]
 });
 

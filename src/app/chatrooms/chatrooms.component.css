@@ -1,4 +1,4 @@
-.form-control:focus button:focus {
+.form-control:focus, button:focus {
     outline: none;
     box-shadow: none;
 }
@@ -8,4 +8,50 @@
 }
 .content {
     cursor: pointer;
+}
+input{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: none;
+}
+input:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+}
+li {
+    margin: 15px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    border-bottom-width: 1px !important;
+}
+.list-group {
+    display: block;
+    border-radius: 10px;
+}
+li:hover {
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+}
+ul{
+    border-radius: 10px;
+    padding: 10px;
+}
+li:last-child{
+    margin-bottom: 15px;
+}
+.room-name{
+    font-weight: normal;
+}
+.room-users{
+    font-size: 16px;
+}
+
+@media (max-width: 767px) {
+    .create-btn{
+        margin-top: 10px;
+    }
 }

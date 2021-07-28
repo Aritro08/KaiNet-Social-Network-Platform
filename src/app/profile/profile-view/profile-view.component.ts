@@ -16,7 +16,7 @@ export class ProfileViewComponent implements OnInit {
   updatedProfileSub: Subscription;
   userId: string;
   id: string;
-
+  
   constructor(private profileService: ProfileService, private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -55,5 +55,9 @@ export class ProfileViewComponent implements OnInit {
     this.profileService.rejectFriendRequest(id, this.userId);
     user.friendStatus = "Add friend";
   }
+
+  // deleteAcc() {
+  //   this.profileService.deleteUser(this.profileData._id);
+  // }
 
 }

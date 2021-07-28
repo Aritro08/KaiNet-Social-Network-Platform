@@ -1,16 +1,19 @@
 ul {
-    border-left: 1px black solid;
+    border-left: 1px rgb(240, 240, 240, 0.85) solid;
+    background-color: #1a1a1b;
 }
 li{
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 0;
+    background-color: #1a1a1b;
 }
 .username{
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 3px;
 }
 .content{
     font-size: 16px;
+    font-weight: 350;
     margin-bottom: 10px; 
 }
 .btn{
@@ -24,4 +27,16 @@ li{
 .form-control:focus{
     box-shadow: none;
     outline: none;
+}
+.comment-div{
+    background-color: #1a1a1b;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+textarea, textarea:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    font-weight: 350;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
 }

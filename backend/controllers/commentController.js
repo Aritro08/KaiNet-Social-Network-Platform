@@ -17,14 +17,16 @@ exports.addComment = (req, res, next) => {
         }).then(resData => {
             count = resData.commentCount + 1;
             res.status(200).json({
-                message: 'Comment added.',
                 count: count
             });
+        }).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - failed to update post.'
+            })
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Comment could not be added.'
+        return res.status(500).json({
+            message: 'Server error - failed to add comment.'
         });
     });
 }
@@ -57,19 +59,28 @@ exports.getComments = (req, res, next) => {
         res.status(200).json({
             comments: threads
         });
+    }).catch(err => {
+        return res.status(500).json({
+            message: 'Server error - failed to load comments.'
+        });
     });
 }
 
 exports.editComment = (req, res, next) => {
-    Comment.findByIdAndUpdate(req.params.id, {
+    Comment.findOneAndUpdate(req.params.id, {
         $set: {'content': req.body.content}
     }).then(resData => {
+        if(!resData) {
+            return res.status(401).json({
+                message: 'Not authorised to perform task.'
+            });
+        }
         res.status(200).json({
-            message: 'Comment updated'
+            message: 'comment'
         });
     }).catch(err => {
-        res.status(500).json({
-            message: 'Comment could not be updated.'
+        return res.status(500).json({
+            message: 'Server error - failed to update comment.'
         });
     });
 }
@@ -81,18 +92,21 @@ exports.deleteComment = (req, res, next) => {
         }).then(resData => {
             count = resData.commentCount - 1;
             res.status(200).json({
-                message: 'Comment deleted.',
                 count: count
             });
         }).catch(err => {
-            console.log(err);
-            res.status(500).json({
-                message: 'Comment could not be deleted',
+            return res.status(500).json({
+                message: 'Server error - failed to update post after deletion.',
                 count: 0
             });
         });
     }
-    Comment.findById(req.params.id).exec().then(delComment => {
+    Comment.findOne({_id: req.params.id, userId: req.userData.id}).then(delComment => {
+        if(!delComment) {
+            return res.status(401).json({
+                message: 'Not Authorised to perform task.'
+            });
+        }
         let id = delComment._id.toString();
         Comment.find({parentId: id}).lean().exec().then(comments => {
             if(comments.length >= 1) {
@@ -100,9 +114,8 @@ exports.deleteComment = (req, res, next) => {
                 delComment.save().then(resData => {
                     decPostCommentCount();
                 }).catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        message: 'Comment could not be deleted.',
+                    return res.status(500).json({
+                        message: 'Server error - comment could not be deleted.',
                         count: 0
                     });
                 });
@@ -110,24 +123,21 @@ exports.deleteComment = (req, res, next) => {
                 delComment.delete().then(resData => {
                     decPostCommentCount();
                 }).catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        message: 'Comment could not be deleted.',
+                    return res.status(500).json({
+                        message: 'Server error - comment could not be deleted.',
                         count: 0
                     });
                 });
             }
         }).catch(err => {
-            console.log(err);
-            res.status(500).json({
-                message: 'Comments could not be fetched for deletion.',
+            return res.status(500).json({
+                message: 'Server error - comments not found.',
                 count: 0
             });
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Comment could not be fetched for deletion.',
+        return res.status(500).json({
+            message: 'Server error - comment not found.',
             count: 0
         });
     });

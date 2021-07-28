@@ -7,6 +7,10 @@ import { ProfileData } from "../models/profile.model";
 import { PostService } from "../posts/post.service";
 import { ProfileService } from "../profile/profile.service";
 
+import { environment } from "src/environments/environment";
+
+const APIURL = environment.apiUrl + 'search';
+
 @Injectable({providedIn: 'root'})
 
 export class SearchService {
@@ -20,7 +24,7 @@ export class SearchService {
 
     getPostsByQuery(query: string) {
         let params = new HttpParams().set('searchQuery', query);
-        this.http.get<{message: string, posts: any}>('http://localhost:3000/api/search/posts', {params: params}).pipe(map(postData => {
+        this.http.get<{posts: any}>(APIURL + '/posts', {params: params}).pipe(map(postData => {
             return {
                 posts: postData.posts.map(post => this.postService.formatPost(post))
             };
@@ -32,7 +36,7 @@ export class SearchService {
 
     getUsersByQuery(query: string) {
         let params = new HttpParams().set('searchQuery', query);
-        this.http.get<{message: string, users: any}>('http://localhost:3000/api/search/users', {params: params}).pipe(map(userData => {
+        this.http.get<{users: any}>(APIURL + '/users', {params: params}).pipe(map(userData => {
             return {
                 users: userData.users.map(user => this.profileService.formatUser(user))
             };

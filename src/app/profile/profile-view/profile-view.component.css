@@ -1,23 +1,28 @@
-a{
-    color: black;
-    text-decoration: none;
-}
 .row{
     display: block;
-    height: 300px;
+    height: 250px;
 }
 .data{
-    padding: 3rem;
+    margin: 15px;
+    background-color: #1a1a1b;
+    border-radius: 10px;
 }
-.img{
+img{
     display: block;
     float: left;
-    width: 200px;
-    margin: 0 2rem 2rem 0;
+    width: 210px;
+    height: 210px;
+    margin: 0 1rem 2rem 0;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .content{
     display: flex;
-    height: 200px;
+    height: 210px;
+    color: rgb(240, 240, 240, 0.85);
+    padding: 20px;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .btn{
     width: fit-content;
@@ -34,4 +39,38 @@ a{
 }
 .request-actions .btn {
     margin: 5px 5px 0 0;
+}
+.profile-container{
+    margin: 20px 180px;
+}
+.nav-link{
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(240, 240, 240, 0.85);
+    margin-right: 10px;
+}
+.nav-link:hover, .nav-link:focus {
+    border-bottom: #040404 1px solid;
+}
+.delete-btn{
+    margin-top: 10px;
+}
+
+@media (max-width: 1180px) {
+    .profile-container{
+        margin: 20px 10px;
+    }
+}
+@media (max-width: 425px) {
+    img{
+        float: none;
+        margin: 10px auto;
+        border-radius: 10px;
+    }
+    .content{
+        align-items: center;
+    }
+    .nav-row{
+        margin-top: 200px;
+    }
 }

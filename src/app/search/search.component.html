@@ -1,14 +1,12 @@
 <div class="row">
     <div class="col-md-8" style="margin: auto;">
         <div class="row">
-            <div class="col-md">
+            <div class="col-lg">
                 <input type="text" name="searchQuery" 
-                class="form-control" [(ngModel)]="searchQuery" (keyup)="runSearch()"> 
+                class="form-control" placeholder="Start typing to search.." [(ngModel)]="searchQuery" (keyup)="runSearch()"> 
             </div>
-            <div class="col-md-1">
-                <label for="filter">Filter: </label>
-            </div>
-            <div class="col-md-2">
+            <div class="col-lg-3 filter-col">
+                <label for="filter"><h3>Filter:</h3></label>
                 <select name="filter" id="filter" [(ngModel)]="filter" class="form-control">
                     <option value="posts" selected>Posts</option>
                     <option value="users">Users</option>

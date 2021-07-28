@@ -5,6 +5,11 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PostService } from '../posts/post.service';
 
+import { environment } from "src/environments/environment";
+import { AuthService } from '../auth/auth.service';
+
+const APIURL = environment.apiUrl + 'users';
+
 @Injectable({providedIn: 'root'})
 
 export class ProfileService{
@@ -20,35 +25,34 @@ export class ProfileService{
         return this.user_name;
     }
 
-    constructor(private http: HttpClient, private router: Router, private postService: PostService) {}
+    constructor(private http: HttpClient, private router: Router, private postService: PostService, private authService: AuthService) {}
 
     getUserData(id: string){
-        return this.http.get<{user: any}>('http://localhost:3000/api/users/' + id).pipe(map(userData => this.formatUser(userData.user)));
+        return this.http.get<{user: any}>(APIURL + '/' + id).pipe(map(userData => this.formatUser(userData.user)));
     }
 
-    updateUserData(id: string, username: string, email: string, bio: string, image: File | string){
+    updateUserData(id: string, email: string, bio: string, image: File | string){
         let userData;
         if (typeof(image) === 'object') {
             userData = new FormData();
             userData.append('id', id);
-            userData.append('username', username);
             userData.append('email', email);
             userData.append('bio', bio);
             userData.append('image', image, id);
         } else {
-            userData = { id: id, username: username, email: email, bio: bio, image: image }
+            userData = { id: id, email: email, bio: bio, image: image }
         }
-        this.http.put('http://localhost:3000/api/users/' + id, userData).subscribe(resData => {
-            this.getUserData(id).subscribe(userData => {
-                localStorage.setItem('username', userData.username);
-                this.user_name = userData.username;
-                this.emitUserName.next(this.user_name);
-            });
+        this.http.put(APIURL + '/' + id, userData).subscribe(resData => {
+            // this.getUserData(id).subscribe(userData => {
+            //     localStorage.setItem('username', userData.username);
+            //     this.user_name = userData.username;
+            //     this.emitUserName.next(this.user_name);
+            // });
         });
     }
 
     getPostsByUserId(userId: string) {
-        return this.http.get<{posts: any}>('http://localhost:3000/api/posts/user/' + userId).pipe(map(postData => {
+        return this.http.get<{posts: any}>(environment.apiUrl + 'posts/user/' + userId).pipe(map(postData => {
             return {
                 posts: postData.posts.map(post => this.postService.formatPost(post))
             };
@@ -56,33 +60,37 @@ export class ProfileService{
     }
 
     getUserFriends(id: string) {
-        return this.http.get<{friends: any}>('http://localhost:3000/api/users/friends/' + id);
+        return this.http.get<{friends: any}>(APIURL+ '/friends/' + id);
     }
 
     getUserFriendRequests(id: string) {
-        return this.http.get<{requests: any}>('http://localhost:3000/api/users/friend-requests/' + id);
+        return this.http.get<{requests: any}>(APIURL+ '/friend-requests/' + id);
     }
 
     sendRequest(id: string, userId: string) {
-        this.http.put('http://localhost:3000/api/users/friend/' + userId, {id: id}).subscribe(resData => {
-            console.log(resData);
-        });
+        this.http.put(APIURL+ '/friend/' + userId, {id: id}).subscribe();
     }
 
     acceptFriendRequest(id: string, userId: string) {
-        this.http.put('http://localhost:3000/api/users/accept-friend/' + id, {id: userId}).subscribe();
+        this.http.put(APIURL+ '/accept-friend/' + id, {id: userId}).subscribe();
     }
 
     rejectFriendRequest(id: string, userId: string) {
-        this.http.put('http://localhost:3000/api/users/reject-friend/' + id, {id: userId}).subscribe();
+        this.http.put(APIURL+ '/reject-friend/' + id, {id: userId}).subscribe();
     }
 
     deleteFriend(id: string, userId: string) {
-        this.http.request('delete', 'http://localhost:3000/api/users/delete-friend/' + id, {
+        this.http.request('delete', APIURL+ '/delete-friend/' + id, {
             headers: {},
             body: {'id': userId}
         }).subscribe();
     }
+
+    // deleteUser(id: string) {
+    //     this.http.delete(APIURL + '/delete-account/' + id).subscribe(resData => {
+    //         this.authService.logout();
+    //     });
+    // }
 
     formatUser(user: any) {
         return {

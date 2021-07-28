@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Comment } from 'src/app/models/comment.model';
 import { Post } from 'src/app/models/post.model';
 import { PostService } from '../post.service';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-post-view',
@@ -25,6 +28,9 @@ export class PostViewComponent implements OnInit {
   countSub: Subscription;
   commentForm: FormGroup;
   comments: Comment[];
+  arrowUp = faArrowUp;
+  arrowDown = faArrowDown;
+  commentFa = faComment;
 
   constructor(private route: ActivatedRoute, private postService: PostService, private authService: AuthService, private router: Router) { }
 
@@ -117,8 +123,12 @@ export class PostViewComponent implements OnInit {
     this.postService.deletePost(id);
   }
 
-  viewUser(username: string) {
-    this.router.navigate(['/profile/' + username]);
+  viewUser(userId: string) {
+    this.router.navigate(['/profile/' + userId]);
+  }
+
+  closePage() {
+    window.history.back();
   }
 
 }

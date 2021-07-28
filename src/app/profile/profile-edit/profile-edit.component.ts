@@ -24,7 +24,7 @@ export class ProfileEditComponent implements OnInit {
     this.profileForm = new FormGroup({
       username: new FormControl(null),
       email: new FormControl(null),
-      bio: new FormControl(null),
+      bio: new FormControl(''),
       image: new FormControl(null)
     });
     this.userId = this.authService.getUserId();
@@ -40,12 +40,12 @@ export class ProfileEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const username = this.profileForm.value.username;
+    // const username = this.profileForm.value.username;
     const email = this.profileForm.value.email;
     const bio = this.profileForm.value.bio;
     const image = this.profileForm.value.image;
-    this.profileService.updateUserData(this.userId, username, email, bio, image);
-    this.router.navigate(['/']);
+    this.profileService.updateUserData(this.userId, email, bio, image);
+    this.router.navigate(['/profile/' + this.userId]);
   }
 
   onAddImage(event: Event) {
@@ -57,6 +57,10 @@ export class ProfileEditComponent implements OnInit {
       this.imagePrev = <string>reader.result;
     }
     reader.readAsDataURL(file);
+  }
+
+  onCancel() {
+    window.history.back();
   }
 
 }

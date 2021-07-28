@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +24,10 @@ import { FriendRequestsComponent } from './profile/profile-view/friend-requests/
 import { FriendListComponent } from './profile/profile-view/friend-list/friend-list.component';
 import { ChatroomsComponent } from './chatrooms/chatrooms.component';
 import { RoomComponent } from './chatrooms/room/room.component';
+import { AuthInterceptor } from './auth/auth-interceptor.service';
+import { ErrorInterceptor } from './error-handle.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './error/error.component';
 
 const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -42,6 +49,7 @@ const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {}
     FriendListComponent,
     ChatroomsComponent,
     RoomComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +57,17 @@ const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {}
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    SocketIoModule.forRoot(socketConfig)
+    SocketIoModule.forRoot(socketConfig),
+    BrowserAnimationsModule,
+    MatDialogModule,
+    FontAwesomeModule,
+    NgbModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }

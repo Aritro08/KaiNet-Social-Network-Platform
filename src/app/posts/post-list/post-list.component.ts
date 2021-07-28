@@ -5,12 +5,16 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Post } from 'src/app/models/post.model';
 import { SearchService } from 'src/app/search/search.service';
 import { PostService } from '../post.service';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
+
 export class PostListComponent implements OnInit {
 
   userId: string;
@@ -20,18 +24,16 @@ export class PostListComponent implements OnInit {
   votedSub: Subscription;
   searchPostsSub: Subscription;
   url: string;
+  arrowUp = faArrowUp;
+  arrowDown = faArrowDown;
+  commentFa = faComment;
 
   constructor(private postService: PostService, private authService: AuthService, 
     private router: Router, private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.posts = null;
+    this.posts = [];
     this.url = this.router.url;
-    // this.router.events.subscribe((event) => {
-    //   if(event instanceof NavigationStart) {
-    //     this.posts = null;
-    //   }
-    // });
     this.isAuth = this.authService.getIsAuth();
     this.authSub = this.authService.getAuthStatus().subscribe(status => {
       this.isAuth = status;

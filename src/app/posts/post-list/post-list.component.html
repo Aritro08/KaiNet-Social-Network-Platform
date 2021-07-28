@@ -1,19 +1,22 @@
+<div class="no-posts row" *ngIf="posts.length == 0">
+        <h4 class="no-posts-content">Posts not found</h4>
+</div>
 <div class="row" *ngFor="let post of posts">
     <div class="card">
         <img [src]="post.image" class="card-img-top" style="cursor: pointer;" [alt]="post.title" *ngIf="post.image" (click) = 'viewPost(post.id)'>
         <div class="card-body">
           <div class="clickable" (click) = 'viewPost(post.id)'>
-                <h5 class="card-title">{{ post.title }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ post.username }}</h6>
-                <p class="card-text" *ngIf="post.content!='null'">{{ post.content.substring(0, 120) + '...' }}</p>
+                <h2 class="card-title">{{ post.title }}</h2>
+                <h4 class="card-subtitle mb-2 text-muted">Posted by {{ post.username }}</h4>
+                <p class="card-text" *ngIf="post.content!=''">{{ post.content.substring(0, 120) + '...' }}</p>
           </div>      
-          <button class="btn btn-outline-primary" type="button" (click)="upVote(post)" 
+          <button class="btn btn-outline-light" type="button" (click)="upVote(post)" 
                   [ngClass]="(post.upvoted&&isAuth? 'active': '')" 
-                  [disabled]="(post.downvoted&&isAuth)||!isAuth">{{ post.upvotes.up_count + ' +'}}</button>
-          <button class="btn btn-outline-primary" type="button" (click)="downVote(post)"
+                  [disabled]="(post.downvoted&&isAuth)||!isAuth">{{ post.upvotes.up_count + ' ' }}<fa-icon [icon]="arrowUp"></fa-icon></button>
+          <button class="btn btn-outline-light" type="button" (click)="downVote(post)"
                   [ngClass]="(post.downvoted&&isAuth? 'active': '')" 
-                  [disabled]="(post.upvoted&&isAuth)||!isAuth">{{ post.downvotes.down_count + ' -'}}</button>
-          <button class="btn btn-primary" [disabled]="true">{{ post.commentCount }}</button>
+                  [disabled]="(post.upvoted&&isAuth)||!isAuth">{{ post.downvotes.down_count + ' '}}<fa-icon [icon]="arrowDown"></fa-icon></button>
+          <button class="btn btn-dark comment-btn" [disabled]="true"><fa-icon class="comment-icon" [icon]="commentFa"></fa-icon>{{ post.commentCount + ' comments' }}</button>
         </div>
       </div>
 </div>

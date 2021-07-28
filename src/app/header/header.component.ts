@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   username: string;
   isAuth: boolean = false;
   userId: string;
+  collapseNav = true;
   
   constructor(private authService: AuthService, private profileService: ProfileService) { }
 
@@ -35,6 +36,18 @@ export class HeaderComponent implements OnInit {
     this.userId = this.authService.getUserId();
     this.userIdSub = this.authService.getUserIdSub().subscribe(id => {
       this.userId = id;
+    });
+  }
+
+  toggleNav() {
+    this.collapseNav = !this.collapseNav;
+    const navlinks = document.querySelectorAll('.nav-link');
+    navlinks.forEach(link => {
+      if(link.classList.contains('vertical-nav')) {
+        link.classList.remove('vertical-nav');
+      } else {
+        link.classList.add('vertical-nav');
+      }
     });
   }
 

@@ -15,7 +15,7 @@ app.use(express.urlencoded());
 app.use('/images/users', express.static(path.join('backend/images/users')));
 app.use('/images/posts', express.static(path.join('backend/images/posts')));
 
-mongoose.connect('mongodb+srv://Aritro:AriTheClust0User@008@cluster0.wmuv0.mongodb.net/socialNetwork?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+mongoose.connect('mongodb+srv://Aritro:'+ process.env.MONGO_PW +'@cluster0.wmuv0.mongodb.net/socialNetwork?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
   console.log('Connected to database.');
 }).catch(() => {
   console.log('Connection failed.');

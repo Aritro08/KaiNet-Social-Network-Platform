@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_PW" : "AriTheClust0User@008",
+        "JWT_SECRET" : "qwerty"
+    }
+}

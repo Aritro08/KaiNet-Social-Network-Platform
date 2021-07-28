@@ -1,6 +1,7 @@
 img{
-    width: 40px;
+    width: 45px;
     border-radius: 50%;
+    margin-right: 20px;
 }
 .btn{
     float: right;
@@ -8,4 +9,14 @@ img{
 .content{
     display: inline-block;
     cursor: pointer;
+    font-size: 16px;
+}
+li{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    margin-top: 10px;
+    border-radius: 10px;
+}
+ul{
+    border-radius: 10px;
 }

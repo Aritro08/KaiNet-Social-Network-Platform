@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const postController = require('../../controllers/postController');
 const commentRoutes = require('./comments');
+const checkAuth = require('../../Middleware/check-auth');
 
 const router = express.Router();
 
@@ -33,15 +34,15 @@ router.get('/:id', postController.getPostByPostId);
 
 router.get('/user/:id', postController.getPostByUserId);
 
-router.post('', multer({storage: postImgStorage}).single('image'), postController.addNewPost);
+router.post('', checkAuth, multer({storage: postImgStorage}).single('image'), postController.addNewPost);
 
-router.put('/edit/:id', multer({storage: postImgStorage}).single('image'), postController.editPost);
+router.put('/edit/:id', checkAuth, multer({storage: postImgStorage}).single('image'), postController.editPost);
 
-router.delete('/delete/:id', postController.deletePost);
+router.delete('/delete/:id', checkAuth, postController.deletePost);
 
-router.put('/upvote/:id', postController.upvotePost);
+router.put('/upvote/:id', checkAuth, postController.upvotePost);
 
-router.put('/downvote/:id', postController.downvotePost);
+router.put('/downvote/:id', checkAuth, postController.downvotePost);
 
 router.use('/comment', commentRoutes);
 

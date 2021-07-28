@@ -7,8 +7,18 @@
 }
 label{
     margin: 15px 10px 0 10px;
+    color: rgb(240, 240, 240, 0.85);
 }
 .btn{
     margin: auto;
     display: block;
+}
+input[type='text'], input[type='text']:focus, select, select:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: none;
+}
+.filter-col{
+    display: flex;
 }

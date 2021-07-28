@@ -1,29 +1,55 @@
-<div class="row" *ngIf="chatroom">
+<div class="row room-container" *ngIf="chatroom">
     <div class="col-md-8">
-        <h3>{{ chatroom.name }}</h3>
+        <h1 class="roomname">{{ chatroom.name }}</h1>
+        <button class="btn btn-light close-room-btn" (click)="onClose()">Close</button>
+        <button class="leave btn btn-dark" type="button" (click)="leaveRoom()">Leave room</button>
+        <div class="overflow-auto chat-box">
+            <div class="message-row row" *ngFor="let message of chatroom.messages">
+                <div class="col-md img-col">
+                    <img [src]="message.image" class="msgimg img-responsive">
+                </div>
+                <div class="chat-content col-md-11">
+                    <p class="from">{{ message.from }}</p>
+                    <p class="datetime">{{ message.datetime }}</p>
+                    <p class="message">{{ message.message }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="type-message">
+            <form #messageForm=ngForm (ngSubmit)="onSubmit(messageForm)">
+                <div class="row">
+                    <div class="message-bar col-md-10">
+                        <input type="text" name="message" id="message" class="form-control" #m="ngModel" ngModel required>
+                    </div>
+                    <div class="send-bar col-md-2">
+                        <button type="submit" class="send btn btn-light" [disabled]="!m.valid">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="col-md-4 left" *ngIf="friends">
+    <div class="col-md-4">
         <div class="members">
             <h3>Members</h3>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngFor="let member of roomMembers">
+                    <img [src]="member.profileImage" class="addimg img-responsive">
                     {{member.username}}
                 </li>
             </ul>
         </div>
-        <!-- <hr> -->
-        <div class="friends">
+        <div class="friends" *ngIf="friends">
             <h3>Add to room</h3>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngFor="let friend of friends">
-                    <div *ngIf="!chatroom.users.includes(friend._id)">
-                        <div class="content">
-                            <img [src]="friend.profileImage" class="img-responsive">
+            <ul class="list-group list-group-flush" *ngIf="friends.length !== 0">
+                <ng-container *ngFor="let friend of friends">
+                    <li class="list-group-item" *ngIf="!chatroom.users.includes(friend._id)">
+                        <div class="addroom-content">
+                            <img [src]="friend.profileImage" class="addimg img-responsive">
                             {{friend.username}}
                         </div>
-                        <button class="btn btn-dark" (click) = "addToRoom(friend._id)">Add</button>
-                    </div>
-                </li>
+                        <button class="addbtn btn btn-dark" (click) = "addToRoom(friend)">Add</button>
+                    </li>
+                </ng-container>
             </ul>
         </div>
     </div>

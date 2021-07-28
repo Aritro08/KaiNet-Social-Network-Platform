@@ -1,3 +1,23 @@
+.upload-container{
+    background-color: #1a1a1b;
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 2rem;
+    color: rgb(240, 240, 240, 0.85);
+}
+.upload-head{
+    text-align: center;
+}
+.cancel-btn, .post-btn{
+    display: inline-block !important;
+    margin: 10px !important;
+}
+.btn-row{
+    justify-content: center;
+    display: flex;
+}
 form{
     max-width: 600px;
     margin: auto;
@@ -9,9 +29,6 @@ form{
     box-shadow: none;
     outline: none;
 } 
-/* button[type='button'] {
-    display: block;
-} */
 .btn{
     margin: 5px auto;
     display: block;
@@ -26,8 +43,24 @@ input[type='file'] {
 .img-prev{
     width: 400px;
     margin: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 .img-prev img{
     width: 100%;
+}
+label{
+    font-size: 18px;
+}
+textarea, textarea:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    font-weight: 350;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
+}
+input[type='text'], input[type='text']:focus{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+    font-size: 16px;
+    border: rgb(240, 240, 240, 0.85) 1px solid;
 }

@@ -4,3 +4,34 @@
 .row{
     margin-top: 1rem;
 }
+.card{
+    background-color: #1a1a1b;
+    color: rgb(240, 240, 240, 0.85);
+}
+.card-title{
+    font-weight: normal;
+    margin: 0;
+}
+.card-text{
+    font-size: 16px;
+    font-weight: 350;
+}
+.comment-icon{
+    margin-right: 10px;
+}
+
+@media (max-width: 1300px) {
+    .comment-btn{
+        margin-top: 10px;
+    }
+}
+@media (max-width: 768px) {
+    .comment-btn{
+        margin-top: 0;
+    }
+}
+@media (max-width: 401px) {
+    .comment-btn{
+        margin-top: 10px;
+    }
+}

@@ -1,14 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">Social</a>
-        <div class="navbar-nav">
-          <a class="nav-link" routerLink="/create-post" routerLinkActive *ngIf="isAuth">Upload</a>
-          <a class="nav-link" routerLink="/search" routerLinkActive *ngIf="isAuth">Search</a>
-          <a class="nav-link" routerLink="/chatrooms" routerLinkActive *ngIf="isAuth">Chat Rooms</a>
-          <a class="nav-link" routerLink="/login" routerLinkActive *ngIf='!isAuth'>Login</a>
-          <a class="nav-link" routerLink="/sign-up" routerLinkActive *ngIf="!isAuth">Sign Up</a>
-          <a class="nav-link" *ngIf="isAuth" [routerLink]="['/profile/' + userId]">{{ username }}</a>
-          <a class="nav-link" *ngIf="isAuth" (click)='logoutUser()'>Logout</a>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark mb-3">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">KaiNet</a>
+    <button class="navbar-toggler" type="button" (click)="toggleNav()">
+      &#9776;
+    </button>
+    <div [ngbCollapse]="collapseNav" class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <a class="nav-link" routerLink="/search" (click)="collapseNav = true" routerLinkActive>Search</a>
+        <a class="nav-link" routerLink="/create-post" (click)="collapseNav = true" routerLinkActive *ngIf="isAuth">Upload</a>
+        <a class="nav-link" routerLink="/chatrooms" (click)="collapseNav = true" routerLinkActive *ngIf="isAuth">Chat Rooms</a>
+        <a class="nav-link" routerLink="/login" (click)="collapseNav = true" routerLinkActive *ngIf='!isAuth'>Login</a>
+        <a class="nav-link" routerLink="/sign-up" (click)="collapseNav = true" routerLinkActive *ngIf="!isAuth">Sign Up</a>
+        <a class="nav-link" *ngIf="isAuth" (click)="collapseNav = true" [routerLink]="['/profile/' + userId]">{{ username }}</a>
+        <a class="nav-link" *ngIf="isAuth" (click)="collapseNav = true" (click)='logoutUser()'>Logout</a>
+      </div>
     </div>
-  </nav>
+  </div>
+</nav>

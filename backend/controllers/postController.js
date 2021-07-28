@@ -7,21 +7,25 @@ exports.getAllPosts = (req, res, next) => {
             posts: posts
         });
     }).catch(err => {
-        res.status(500).json({
-            message: 'Posts could not be fetched.'
+        return res.status(500).json({
+            message: 'Server error - posts not found.'
         });
     });
 }
 
 exports.getPostByPostId = (req, res, next) => {
     Post.findById(req.params.id).then(post => {
+        if(!post) {
+            return res.status(500).json({
+                message: 'Post not found.'
+            });
+        }
         res.status(200).json({
             post: post
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Post could not if fetched.'
+        return res.status(500).json({
+            message: 'Server error - post not found.'
         });
     });
 }
@@ -32,9 +36,8 @@ exports.getPostByUserId = (req, res, next) => {
             posts: posts
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Posts could not if fetched.'
+        return res.status(500).json({
+            message: 'Server error - posts not found.'
         });
     });
 }
@@ -64,13 +67,11 @@ exports.addNewPost = (req, res, next) => {
     });
     post.save().then(resData => {
         res.status(200).json({
-            id: resData._id,
-            message: 'Post added'
+            id: resData._id
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Post could not be added.'
+        return res.status(500).json({
+            message: 'Server error - post could not be uploaded.'
         });
     });
 }
@@ -81,34 +82,42 @@ exports.editPost = (req, res, next) => {
         const url = req.protocol + '://' + req.get('host');
         imagePath = url +'/images/posts/' + req.file.filename;
     }
-    Post.findByIdAndUpdate(req.params.id, {
+    Post.findOneAndUpdate({_id: req.params.id, userId: req.userData.id}, {
         $set: {'title': req.body.title, 'content': req.body.content, 'image': imagePath}
     }).then(resData => {
+        if(!resData) {
+            return res.status(401).json({
+                message: 'Not authorised to perform task.'
+            });
+        }
         res.status(200).json({
             message: 'Post updated.'
         });
     }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            message: 'Post could not be updated.'
+        return res.status(500).json({
+            message: 'Server error - unable to edit post.'
         });
     });
 }
 
 exports.deletePost = (req, res, next) => {
-    Post.findByIdAndDelete(req.params.id).then(resData => {
-        Comment.deleteMany({postId: req.params.id}).then(resCommentData => {
-            res.status(200).json({
-                message: 'Post deleted.'
+    Post.findOneAndDelete({_id: req.params.id, userId: req.userData.id}).then(resData => {
+        if(!resData) {
+            return res.status(401).json({
+                message: 'Not authorised to perform task.'
             });
-        }).catch(err => {
-            res.status(500).json({
-                message: 'Post deleted but comments could not be deleted.'
+        }
+        Comment.deleteMany({postId: req.params.id}).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - unable to delete post comments.'
             });
         });
+        res.status(200).json({
+            message: 'post deleted.'
+        });
     }).catch(err => {
-        res.status(500).json({
-            message: 'Post could not be deleted.'
+        return res.status(500).json({
+            message: 'Server error - unable to delete post.'
         });
     });
 }
@@ -118,18 +127,18 @@ exports.upvotePost = (req, res, next) => {
         Post.findByIdAndUpdate(req.params.id, {
             $set: {'upvotes.up_count': req.body.count},
             $push: {'upvotes.up_users': req.body.userId}
-        }).then(resData => {
-            res.status(200).json({
-                message: 'Post upvoted'
+        }).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - upvote failed.'
             });
         });
     } else {
         Post.findByIdAndUpdate(req.params.id, {
             $set: {'upvotes.up_count': req.body.count},
             $pull: {'upvotes.up_users': req.body.userId}
-        }).then(resData => {
-            res.status(200).json({
-                message: 'Removed upvote'
+        }).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - failed to remove upvote.'
             });
         });
     }
@@ -140,18 +149,18 @@ exports.downvotePost = (req, res, next) => {
         Post.findByIdAndUpdate(req.params.id, {
             $set: {'downvotes.down_count': req.body.count},
             $push: {'downvotes.down_users': req.body.userId}
-        }).then(resData => {
-            res.status(200).json({
-                message: 'Post downvoted'
+        }).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - downvote failed.'
             });
         });
     } else {
         Post.findByIdAndUpdate(req.params.id, {
             $set: {'downvotes.down_count': req.body.count},
             $pull: {'downvotes.down_users': req.body.userId}
-        }).then(resData => {
-            res.status(200).json({
-                message: 'Removed downvote'
+        }).catch(err => {
+            return res.status(500).json({
+                message: 'Server error - failed to remove downvote.'
             });
         });
     }

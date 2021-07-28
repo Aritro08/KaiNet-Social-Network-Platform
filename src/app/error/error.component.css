@@ -1,0 +1,10 @@
+button:focus{
+    box-shadow: none;
+    outline: none;
+}
+.close{
+    display: flex;
+}
+button{
+    float: right;
+}

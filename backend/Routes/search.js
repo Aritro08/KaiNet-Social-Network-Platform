@@ -10,14 +10,12 @@ router.get('/posts', (req, res, next) => {
         Post.find({title: regex}).then(posts => {
             if(posts.length > 0) {
                 res.status(200).json({
-                    message: 'Posts found based on search.',
                     posts: posts
                 });
             }
         }).catch(err => {
-            console.log(err);
-            res.status(500).json({
-                message: 'Unable to search for posts.',
+            return res.status(500).json({
+                message: 'Server error - unable to search for posts.',
                 posts: null
             });
         });
@@ -30,14 +28,12 @@ router.get('/users', (req, res, next) => {
         User.find({username: regex}).then(users => {
             if(users.length > 0) {
                 res.status(200).json({
-                    message: 'Users found based on search.',
                     users: users
                 });
             }
         }).catch(err => {
-            console.log(err);
             res.status(500).json({
-                message: 'Unable to search for users.',
+                message: 'Server error - unable to search for users.',
                 users: null
             });
         });

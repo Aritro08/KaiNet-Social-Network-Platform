@@ -5,6 +5,10 @@ import { Subject } from 'rxjs';
 import { LoginData } from '../models/login.model';
 import { SignUpData } from '../models/sign-up.model';
 
+import { environment } from 'src/environments/environment';
+
+const APIURL = environment.apiUrl + 'users';
+
 @Injectable({providedIn: 'root'})
 
 export class AuthService{
@@ -50,7 +54,7 @@ export class AuthService{
 
     signUpUser(username: string, email: string, password: string) {
         const signUpData: SignUpData = {username: username, email: email, password: password};
-        this.http.post<{token: string, expiresIn: number, userId: string, username: string}>('http://localhost:3000/api/users/sign-up', signUpData).subscribe(resData => {
+        this.http.post<{token: string, expiresIn: number, userId: string, username: string}>(APIURL + '/sign-up', signUpData).subscribe(resData => {
             this.authenticateUser(resData.token, resData.userId, resData.expiresIn, resData.username);
         }, err => {
             this.authStatus.next(false);
@@ -59,7 +63,7 @@ export class AuthService{
 
     loginUser(username: string, password: string) {
         const loginData: LoginData = {username: username, password: password};
-        this.http.post<{token: string, expiresIn: number, userId: string, username: string}>('http://localhost:3000/api/users/login', loginData).subscribe(resData => {
+        this.http.post<{token: string, expiresIn: number, userId: string, username: string}>(APIURL + '/login', loginData).subscribe(resData => {
             this.authenticateUser(resData.token, resData.userId, resData.expiresIn, resData.username);
         }, err => {
             this.authStatus.next(false);

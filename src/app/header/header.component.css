@@ -1,7 +1,26 @@
 .nav-link{
     cursor: pointer;
     font-size: 18px;
+    margin-left: 20px;
 }
 .navbar-brand{
     font-size: 22px;
+}
+.navbar{
+    background-color: #1a1a1b;
+    border-bottom: 1px solid rgb(200, 200, 200, 0.85);
+    color: rgb(240, 240, 240, 0.85);
+    height: 55px;
+}
+.navbar-collapse{
+    justify-content: flex-end;
+}
+.navbar-nav{
+    position: relative;
+    z-index: 1;
+    background-color: #1a1a1b;
+    border-radius: 10px;
+}
+.vertical-nav{
+    margin: 5px 20px;
 }

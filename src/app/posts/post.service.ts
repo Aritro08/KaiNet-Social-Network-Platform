@@ -4,6 +4,10 @@ import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
+import { environment } from "src/environments/environment";
+
+const APIURL = environment.apiUrl + 'posts';
+
 @Injectable({providedIn:'root'})
 
 export class PostService {
@@ -14,11 +18,11 @@ export class PostService {
     constructor(private http: HttpClient, private router: Router) {}
 
     getPostById(postId: string) {
-        return this.http.get<{post: any}>('http://localhost:3000/api/posts/' + postId).pipe(map(postData => this.formatPost(postData.post)));
+        return this.http.get<{post: any}>(APIURL + '/' + postId).pipe(map(postData => this.formatPost(postData.post)));
     }
 
     getPosts() {
-        return this.http.get<{posts: any}>('http://localhost:3000/api/posts').pipe(map(postData => {
+        return this.http.get<{posts: any}>(APIURL).pipe(map(postData => {
             return {
                 posts: postData.posts.map(post => this.formatPost(post))
             };
@@ -32,7 +36,7 @@ export class PostService {
         postData.append('image', image);
         postData.append('userId', userId);
         postData.append('username', username);
-        this.http.post('http://localhost:3000/api/posts', postData).subscribe(resData => {
+        this.http.post(APIURL, postData).subscribe(resData => {
             this.router.navigate(['/']);
         });
     }
@@ -48,33 +52,30 @@ export class PostService {
         } else {
             postData = { id: id, title: title, content: content, image: image };
         }
-        this.http.put('http://localhost:3000/api/posts/edit/' + id, postData).subscribe(resData => {
-            console.log(resData);
+        this.http.put(APIURL + '/edit/' + id, postData).subscribe(resData => {
             this.router.navigate(['/']);
         });
     }
 
     deletePost(id: string) {
-        this.http.delete('http://localhost:3000/api/posts/delete/' + id).subscribe(resData => {
-            console.log(resData);
+        this.http.delete(APIURL + '/delete/' + id).subscribe(resData => {
             this.router.navigate(['/']);
         });
     }
 
     upVotesUpdate(postId: string, userId: string, count: number, type: string) {
         const updateData = {userId: userId, count: count, type: type};
-        this.http.put('http://localhost:3000/api/posts/upvote/' + postId, updateData).subscribe();
+        this.http.put(APIURL + '/upvote/' + postId, updateData).subscribe();
     }
 
     downVotesUpdate(postId: string, userId: string, count: number, type: string) {
         const updateData = {userId: userId, count: count, type: type};
-        this.http.put('http://localhost:3000/api/posts/downvote/' + postId, updateData).subscribe();
+        this.http.put(APIURL + '/downvote/' + postId, updateData).subscribe();
     }
 
     addComment(content: string, parentId: string, userName:string, postId: string, userId: string) {
         const commenData = {parentId: parentId, userName: userName, content: content, userId: userId};
-        this.http.post<{message: string, count: number}>('http://localhost:3000/api/posts/comment/' + postId, commenData).subscribe(resData => {
-            // console.log(resData);
+        this.http.post<{count: number}>(APIURL + '/comment/' + postId, commenData).subscribe(resData => {
             this.countSub.next(resData.count);
             this.getComments(postId).subscribe(resData => {
                 this.commentsSub.next(resData);
@@ -83,14 +84,13 @@ export class PostService {
     }
 
     getComments(id: string) {
-        return this.http.get<{comments: any}>('http://localhost:3000/api/posts/comment/' + id);
+        return this.http.get<{comments: any}>(APIURL + '/comment/' + id);
     }
 
     deleteComment(commentId: string, postId: string) {
-        this.http.request<{message: string, count: number}>('delete', 'http://localhost:3000/api/posts/comment/' + commentId, {
+        this.http.request<{count: number}>('delete', APIURL + '/comment/' + commentId, {
             headers: {}, 
             body: {'postId': postId}}).subscribe(resData => {
-            console.log(resData);
             this.countSub.next(resData.count);
             this.getComments(postId).subscribe(resData => {
                 this.commentsSub.next(resData);
@@ -99,7 +99,7 @@ export class PostService {
     }
 
     editComment(id: string, content: string) {
-        return this.http.put('http://localhost:3000/api/posts/comment/' + id, {content: content});
+        return this.http.put(APIURL + '/comment/' + id, {content: content});
     }
 
     formatPost(post: any) {

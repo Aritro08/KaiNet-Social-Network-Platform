@@ -1,24 +1,28 @@
-<form [formGroup] = 'profileForm' (ngSubmit)='onSubmit()'>
-    <div class="img-prev" *ngIf="imagePrev !== '' && imagePrev && profileForm.get('image').valid">
-        <img [src]="imagePrev">
-    </div>
-    <div>
-        <button class="btn btn-dark" type="button" (click)="filePicker.click()">Upload Image</button>
-        <input type="file" #filePicker (change)="onAddImage($event)">
-    </div>
-    <div class="form-group row">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" formControlName='username'>
-    </div>
-    <div class="form-group row">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" formControlName='email'>
-    </div>
-    <div class="form-group row">
-        <label for="Bio">Bio</label>
-        <textarea class="form-control" formControlName='bio'></textarea>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-success" [disabled] = "profileForm.invalid">Update</button>
-    </div>
-</form>
+<div class="edit-container">
+    <h2 class="edit-head">Edit your profile</h2>
+    <form [formGroup] = 'profileForm' (ngSubmit)='onSubmit()'>
+        <div class="img-prev" *ngIf="imagePrev !== '' && imagePrev && profileForm.get('image').valid">
+            <img [src]="imagePrev">
+        </div>
+        <div>
+            <button class="btn btn-dark" type="button" (click)="filePicker.click()">Change Image</button>
+            <input type="file" #filePicker (change)="onAddImage($event)">
+        </div>
+        <!-- <div class="form-group row">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" formControlName='username'>
+        </div> -->
+        <div class="form-group row">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" formControlName='email'>
+        </div>
+        <div class="form-group row">
+            <label for="Bio">Bio</label>
+            <textarea class="form-control" formControlName='bio'></textarea>
+        </div>
+        <div class="btn-row">
+            <button type="submit" class="btn btn-light update-btn" [disabled] = "profileForm.invalid">Update</button>
+            <button class="btn btn-light cancel-btn" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>

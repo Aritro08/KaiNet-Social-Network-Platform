@@ -1,20 +1,25 @@
-<form [formGroup]='postForm' (ngSubmit)='onAddPost()'>
-    <div class="form-group row">
-        <label for="title">Title: </label>
-        <input type="text" id="title" class="form-control" formControlName='title'>
-    </div>
-    <div>
-        <button class="btn btn-dark" type="button" (click)="filePicker.click()">Add Image</button>
-        <input type="file" #filePicker (change)="onAddImage($event)">
-    </div>
-    <div class="img-prev" *ngIf="imagePrev !== '' && imagePrev && postForm.get('image').valid">
-        <img [src]="imagePrev">
-    </div>
-    <div class="form-group row">
-        <label for="content">Content(Optional): </label>
-        <textarea class="form-control" id="content" cols="30" rows="7" formControlName='content'></textarea>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-success" [disabled] = "postForm.invalid">Post</button>
-    </div>
-</form>
+<div class="upload-container">
+    <h2 class="upload-head">{{editMode ? 'Edit your post':'Create a post'}}</h2>
+    <form [formGroup]='postForm' (ngSubmit)='onAddPost()'>
+        <div class="form-group row">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" formControlName='title'>
+        </div>
+        <div>
+            <button class="btn btn-dark" type="button" (click)="filePicker.click()">Add Image</button>
+            <input type="file" #filePicker (change)="onAddImage($event)">
+        </div>
+        <div class="img-prev" *ngIf="imagePrev !== '' && imagePrev && postForm.get('image').valid">
+            <img [src]="imagePrev">
+        </div>
+        <div class="form-group row">
+            <label for="content">Content (Optional)</label>
+            <textarea class="form-control" id="content" cols="30" rows="7" formControlName='content'></textarea>
+        </div>
+        <div class="btn-row">
+            <button type="submit" class="btn btn-light post-btn" [disabled] = "postForm.invalid">Post</button>
+            <button class="btn btn-light cancel-btn" *ngIf="editMode" (click)="onCancel()">Cancel</button>
+        </div>
+    </form>
+</div>
+

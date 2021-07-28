@@ -1,27 +1,34 @@
-<div class="row">
+<div class="row create-bar">
     <div class="col-md-8" style="margin: auto;">
         <form #f=ngForm (ngSubmit)="onSubmit(f)">
             <div class="row">
                 <div class="col-md-9">
-                    <input type="text" class="form-control" placeholder="Enter chatroom name" name="roomName" ngModel>
+                    <input type="text" class="form-control" placeholder="Enter chatroom name" name="roomName" required #name="ngModel" ngModel>
                 </div>
-                <div class="col-md-3">
-                    <button class="btn btn-dark" type="submit">Create Room</button>
+                <div class="col-md-3 create-btn">
+                    <button class="btn btn-dark" type="submit" [disabled]="!name.valid">Create Room</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <hr>
-<div class="row">
-    <div class="col-md-8" style="margin: auto;">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let chatroom of chatlist">
-                <div class="content" (click) = "viewRoom(chatroom._id)">
-                    <h4>{{ chatroom.name }}</h4>
-                    <p>Members : {{ chatroom.users.length }}</p>
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let chatroom of chatlist">
+        <div class="content" (click) = "viewRoom(chatroom._id, chatroom.name)">
+            <h1 class="room-name">{{ chatroom.name }}</h1>
+            <p class="room-users">Members : {{ chatroom.users.length }}</p>
+        </div>
+    </li>
+</ul>
+    <!-- <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let user of users">
+            <div>
+                <img [src]="user.profileImage" class="img img-responsive">
+                <div class="content">
+                    <h2>{{ user.username }}</h2>
+                    <button class="btn btn-dark" type="button" (click)="onViewProfile(user._id)">View Profile</button>
                 </div>
-            </li>
-        </ul>
-    </div>
-</div>
+            </div>
+        </li>
+    </ul> -->
