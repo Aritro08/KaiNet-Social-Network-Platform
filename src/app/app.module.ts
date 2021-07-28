@@ -28,7 +28,9 @@ import { AuthInterceptor } from './auth/auth-interceptor.service';
 import { ErrorInterceptor } from './error-handle.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorComponent } from './error/error.component';
+import { environment } from 'src/environments/environment';
 
+const APIURL = environment.apiUrl;
 const socketConfig: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
