@@ -1,0 +1,22 @@
+{
+  "name": "social-app",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.19",
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "popper.js": "^1.16.1",
+    "socket.io": "^4.1.2",
+    "tether": "^1.4.7",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.11.4"
+  }
+}

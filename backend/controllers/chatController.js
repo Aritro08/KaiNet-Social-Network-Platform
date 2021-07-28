@@ -26,6 +26,7 @@ exports.createChatroom = (req, res, next) => {
         });
     });
 }
+
 exports.getUserChatlist = (req, res, next) => {
     User.findById(req.params.id).then(user => {
         Chatroom.find({_id: { $in: user.chatList }}).then(chatlist => {
