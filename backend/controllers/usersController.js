@@ -33,7 +33,6 @@ exports.login = (req, res, next) => {
         });
     });
 }
-
 exports.signUp = (req, res, next) => {
     const url = req.protocol + '://' + req.get('host');
     let profileImage = url + '/images/users/default-avatar.jpg';
